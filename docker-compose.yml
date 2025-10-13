@@ -1,0 +1,29 @@
+version: '3.8'
+
+services: 
+  backend: 
+    #Build from backend Dockerfile
+    build: ./backend
+    ports: 
+      #Map port 5000 to port 5000
+      - "5000:5000"
+    volumes: 
+      #Create volume for database persistence 
+      - db_data:/app/data
+
+  frontend:
+    #Build from frontend Dockerfile
+    build: ./frontend
+    #Map port 3000 to port 80 
+    ports: 
+      - "3000:80"
+    #Ensure backend starts first 
+    depends_on:
+      - backend
+    #Set environment variable 
+    environment:
+    - VITE_API_URL=http://localhost:5000
+#Add volumes section to persist database data
+volumes:
+  db_data:
+
