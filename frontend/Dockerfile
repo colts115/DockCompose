@@ -16,6 +16,9 @@ COPY . .
 #Build the app
 RUN npm run build 
 
+ARG VITE_API_URL 
+ENV VITE_API_URL=$VITE_API_URL
+
 #Use nginx to serve the build files 
 FROM nginx:alpine
 COPY --from=0 /app/dist /usr/share/nginx/html
