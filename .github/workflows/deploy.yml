@@ -100,7 +100,6 @@ jobs:
           --port 80 \
           --memory 512Mi \
           --cpu 1
-          --revision-suffix=${{ github.run_id }}
     
     - name: Get deployed URLs
       if: success()
